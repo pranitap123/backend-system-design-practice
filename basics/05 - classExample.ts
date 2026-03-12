@@ -1,6 +1,7 @@
 /* =====================================
    INTERFACE + CLASS IMPLEMENTATION
    + CLASS INHERITANCE (extends)
+   //interfaces can be implemented as classes
    =====================================
 
    1️⃣ interface → defines structure
@@ -82,3 +83,5 @@ console.log(manager.age);
 
 // calling method defined in interface
 console.log(manager.isLegal());
+
+
