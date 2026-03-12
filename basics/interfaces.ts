@@ -11,7 +11,7 @@
    Think of it as a blueprint for objects.
 */
 
-interface User {
+interface UserExample {
     firstName: string,   // user's first name (must be string)
     lastName: string,    // user's last name (must be string)
     email: string,       // user's email (must be string)
@@ -27,7 +27,7 @@ ensures the object passed to this function
 must contain all properties defined in User.
 */
 
-function isLegalTest(user: User){
+function isLegalTest(user: UserExample){
 
     // Accessing property from the User object
     if(user.age > 18){

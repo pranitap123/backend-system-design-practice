@@ -43,7 +43,12 @@ function sum(a: sumInput, b: sumInput){
 // Manager interface
 interface Manager{
     name: string,
-    age: number
+    age: number,
+    address?: { //? represent that the parameter can be optional
+        city?: string,
+        country?: string, //(if we put the address)city and country can also be optional
+        pincode: number //pincode is required field
+    }
 }
 
 
