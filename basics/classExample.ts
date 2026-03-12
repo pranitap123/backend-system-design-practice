@@ -1,46 +1,69 @@
 /* =====================================
    INTERFACE + CLASS IMPLEMENTATION
+   + CLASS INHERITANCE (extends)
    =====================================
 
-   An interface defines the structure that
-   a class must follow.
-
-   When a class "implements" an interface,
-   it must include all properties defined
-   in that interface.
+   1️⃣ interface → defines structure
+   2️⃣ implements → class must follow that structure
+   3️⃣ extends → class inherits properties from another class
 */
 
 
-// Interface defining the structure of a person
+// Interface defining structure of a person
 interface People{
-    name: string;  // person's name
-    age: number;   // person's age
+    name: string;      // person's name
+    age: number;       // person's age
+
+    // method that must be implemented by class
+    isLegal(): boolean;
 }
 
 
 /*
-Manager class implementing People interface.
+Base class
 
-This means the class MUST contain:
-- name
-- age
+This class will be inherited by other classes.
 */
-class Manager implements People{
+class Person{
+    createdAt: Date;
 
-    // properties required by the interface
+    constructor(){
+        // store creation time of object
+        this.createdAt = new Date();
+    }
+}
+
+
+/*
+Manager class
+
+- extends Person → inherits properties from Person
+- implements People → must follow People interface
+*/
+class Manager extends Person implements People{
+
+    // properties required by interface
     name: string;
     age: number;
 
-    // additional property specific to Manager
+    // extra property specific to Manager
     number: string;
 
-    // constructor initializes the object
     constructor(name:string, age:number){
+
+        // calling parent class constructor
+        super();
+
         this.name = name;
         this.age = age;
 
-        // extra property not defined in interface
+        // additional property
         this.number = "123456789";
+    }
+
+    // implementing method from interface
+    isLegal(): boolean {
+        return this.age > 18;
     }
 }
 
@@ -49,5 +72,13 @@ class Manager implements People{
 let manager = new Manager("Pranita", 22);
 
 
-// accessing property
+// accessing inherited property from Person
+console.log(manager.createdAt);
+
+
+// accessing class property
 console.log(manager.age);
+
+
+// calling method defined in interface
+console.log(manager.isLegal());
