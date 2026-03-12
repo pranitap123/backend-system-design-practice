@@ -18,9 +18,15 @@ interface Admin{
     permission: string;
 }
 
+interface Address{
+city: string;
+pincode: number;
+}
+
 interface User{
     name: string;
     age: number;
+    adresses?: Address[]; //user can have many addresses
 }
 
 type UserOrAdmin = User | Admin;
