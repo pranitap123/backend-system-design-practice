@@ -1,16 +1,20 @@
 /* =====================================
-   PICK UTILITY TYPE IN TYPESCRIPT
+   TYPESCRIPT UTILITY TYPES
+   Pick + Partial
    =====================================
 
-   Pick<T, K> is a utility type that
-   selects specific properties from a type.
+   Pick<T, K>
+   → Select specific properties from a type.
 
-   Useful when you only need some fields
-   from a larger object.
+   Partial<T>
+   → Makes all properties optional.
+
+   These are commonly used in backend APIs
+   when sending limited or update data.
 */
 
 
-// Full user structure
+// Full user structure (for database or full profile)
 interface User1{
     id: string;
     name: string;
@@ -27,29 +31,40 @@ For profile display we only need:
 - email
 
 Pick<User1, 'name' | 'age' | 'email'>
-creates a new type with only these fields
+creates a new type containing ONLY those fields.
 */
 type UserProfile = Pick<User1, 'name' | 'age' | 'email'>;
 
 
 /*
+Partial<T>
+
+Makes all fields optional.
+
+Example use case:
+Updating user profile where user may send
+only one field instead of the entire object.
+*/
+type UpdateUserOptional = Partial<UserProfile>;
+
+
+/*
 Function to display user profile.
 
-Parameter type is UserProfile,
-so only the selected fields are allowed.
+Since fields are optional (because of Partial),
+we use optional chaining or fallback values.
 */
-const displayUserProfile = (user: UserProfile) => {
+const displayUserProfile = (user: UpdateUserOptional) => {
 
-    // printing user profile details
     console.log(
-        "Name: " + user.name,
-        "Age: " + user.age,
-        "Email: " + user.email
+        "Name:", user.name ?? "Not provided",
+        "Age:", user.age ?? "Not provided",
+        "Email:", user.email ?? "Not provided"
     );
 };
 
 
-// Example usage
+// Example full profile
 const userProfileData: UserProfile = {
     name: "Pranita",
     age: "22",
@@ -59,3 +74,17 @@ const userProfileData: UserProfile = {
 
 // calling function
 displayUserProfile(userProfileData);
+
+
+/*
+Example update object
+
+User may update only one field.
+*/
+const updateData: UpdateUserOptional = {
+    email: "newemail@email.com"
+};
+
+
+// displaying partial data
+displayUserProfile(updateData);
